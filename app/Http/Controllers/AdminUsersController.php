@@ -41,7 +41,7 @@ class AdminUsersController extends Controller
     		$data['photo_id'] = $photo->id;
 		}
 
-		$data['password'] = bcrypt($request->getPassword());
+		$data['password'] = bcrypt($request->password);
 
 		User::create($data);
 
@@ -55,12 +55,39 @@ class AdminUsersController extends Controller
 
     public function edit($id)
     {
-		return view('admin.users.edit');
+    	$user = User::findOrFail($id);
+		$roles = Role::lists('name', 'id')->all();
+
+		return view('admin.users.edit', compact('user', 'roles'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UsersRequest $request, $id)
     {
-        //
+		$user = User::findOrFail($id);
+
+		if($request->password == '')
+		{
+			$data = $request->except('password');
+		} else {
+
+			$data = $request->all();
+			$data['password'] = bcrypt($request->password);
+		}
+
+		if($file = $request->file('file'))
+		{
+			$name = time()."_".$file->getClientOriginalName();
+
+			$file->move('images', $name);
+
+			$photo = Photo::create(['file' => $name]);
+
+			$data['photo_id'] = $photo->id;
+		}
+
+		$user->update($data);
+
+		return redirect('/admin/users');
     }
 
     public function destroy($id)
