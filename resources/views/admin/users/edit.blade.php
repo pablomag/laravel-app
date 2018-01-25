@@ -1,4 +1,4 @@
-@extends('admin/index')
+@extends('layouts.index')
 
 @section('content')
 
@@ -47,13 +47,22 @@
             {!! Form::file('file', null, ['class' => 'form-control']) !!}
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display: inline-block; float: right;">
             {!! Form::submit('Save data', ['class' => 'btn btn-primary']) !!}
         </div>
 
         {!! Form::close() !!}
 
-        @include('includes.errors')
+        {!! Form::model($user, ['method' => 'DELETE', 'action' => ['AdminUsersController@destroy', $user->id]]) !!}
+
+        <div class="form-group" style="display: inline-block; float: left;">
+            {!! Form::submit('Delete user', ['class' => 'btn btn-danger']) !!}
+        </div>
+
+        {!! Form::close() !!}
+
+        <div style="clear: both;"><br/>@include('includes.errors')</div>
     </div>
 
+    <div style="clear: both;"><br/></div>
 @endsection

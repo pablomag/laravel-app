@@ -22,7 +22,8 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected $middlewareGroups = [
+    protected $middlewareGroups =
+	[
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
@@ -43,11 +44,13 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
-    protected $routeMiddleware = [
+    protected $routeMiddleware =
+	[
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+		'admin.rights' => \App\Http\Middleware\AdminRights::class,
     ];
 }

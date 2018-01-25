@@ -26,6 +26,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function getPosts()
+	{
+		return $this->hasMany('App\Post', 'user_id');
+	}
+
     public function getRole()
 	{
 		return $this->belongsTo('App\Role', 'role_id');
@@ -34,5 +39,15 @@ class User extends Authenticatable
 	public function getPhoto()
 	{
 		return $this->belongsTo('App\Photo', 'photo_id');
+	}
+
+	public function hasAdminRights()
+	{
+		if ($this->getRole->name == "administrator" && $this->is_active == 1)
+		{
+			return true;
+		}
+
+		return false;
 	}
 }

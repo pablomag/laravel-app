@@ -1,4 +1,4 @@
-@extends('admin/index')
+@extends('layouts.index')
 
 @section('content')
 
@@ -42,13 +42,14 @@
             {!! Form::file('file', null, ['class' => 'form-control']) !!}
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display: inline-block; float: right;">
             {!! Form::submit('Create user', ['class' => 'btn btn-primary']) !!}
         </div>
 
         {!! Form::close() !!}
 
-        @include('includes.errors')
+        <div style="clear: both;"><br/>@include('includes.errors')</div>
     </div>
 
+    <div style="clear: both;"><br/></div>
 @endsection

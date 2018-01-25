@@ -1,8 +1,12 @@
-@extends('admin/index')
+@extends('layouts.index')
 
 @section('content')
 
     <h1>Users Index</h1>
+
+    @if(Session::has('flash_message'))
+        <div class="bg-success">{{session('flash_message')}}</div>
+    @endif
 
     @if($users)
     <ul>
@@ -20,4 +24,5 @@
     </ul>
     @endif
 
+    <div style="clear: both;"><br/></div>
 @endsection
