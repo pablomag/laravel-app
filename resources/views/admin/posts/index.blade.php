@@ -24,6 +24,7 @@
                         {{ $post->created_at->diffForHumans() }}
                     </span>
                 </div>
+                <div style="line-height: 50px; display: inline-block;">{{$post->getCategory->name}}</div>
             </a>
             <span class="clearfix"></span>
         </li>
